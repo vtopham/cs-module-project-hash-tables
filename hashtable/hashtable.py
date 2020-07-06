@@ -58,10 +58,10 @@ class HashTable:
         """
 
         # Your code here
-        
+        offset = 14695981039346656037
         prime = 1099511628211
         hash_bytes = key.encode("utf-8")
-        hash_int = int.from_bytes(hash_bytes, 'big')
+        hash_int = offset
         # print(hash_bytes)
         for byte in hash_bytes:
             hash_int = hash_int ^ byte
