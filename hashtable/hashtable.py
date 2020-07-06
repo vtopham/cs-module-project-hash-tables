@@ -61,14 +61,13 @@ class HashTable:
         
         prime = 1099511628211
         hash_bytes = key.encode("utf-8")
+        hash_int = int.from_bytes(hash_bytes, 'big')
         # print(hash_bytes)
         for byte in hash_bytes:
-            print(byte)
-            print(int.from_bytes(hash_bytes, 'big'))
-            hash_int = int.from_bytes(hash_bytes, 'big') ^ byte
+            hash_int = hash_int ^ byte
             hash_int = hash_int * prime
         
-        return hash_bytes
+        return hash_int
 
         
 
