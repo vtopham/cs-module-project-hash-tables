@@ -98,7 +98,24 @@ class HashTable:
         Implement this.
         """
         # Your code here
-        self.hashtable[self.hash_index(key)] = value
+        #make node
+        newNode = HashTableEntry(key, value)
+        #If empty slot, add node
+        index = self.hash_index(key)
+        if self.hashtable[index] = None:
+            self.hashtable[index] = newNode
+
+        
+        else:
+            cur = self.hashtable[index]
+            if cur.next = None: #if we're at the end of the list, add node and update linked list
+                cur.next = newNode
+            else:
+                if cur.key = key:
+                    cur.value = value #If not empty, search list for matching key
+        
+            
+        
 
     def delete(self, key):
         """
