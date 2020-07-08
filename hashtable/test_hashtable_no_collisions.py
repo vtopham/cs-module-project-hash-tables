@@ -18,10 +18,13 @@ class TestHashTable(unittest.TestCase):
         ht.put("key-2", "val-2")
 
         return_value = ht.get("key-0")
+        print(f"return value is {return_value}")
         self.assertTrue(return_value == "val-0")
         return_value = ht.get("key-1")
+        print(f"return value is {return_value}")
         self.assertTrue(return_value == "val-1")
         return_value = ht.get("key-2")
+        print(f"return value is {return_value}")
         self.assertTrue(return_value == "val-2")
 
     def test_hash_table_pution_overwrites_correctly(self):

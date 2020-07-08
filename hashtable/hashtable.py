@@ -196,7 +196,7 @@ class HashTable:
             return None
         #if linked list, search
         else:
-            searchNodes(self.hashtable[index], key)
+            return searchNodes(self.hashtable[index], key)
 
        
 
