@@ -108,7 +108,7 @@ class HashTable:
                 cur.value = value #If not empty, search list for matching key
             elif cur.next == None: #if we're at the end of the list, add node and update linked list
                 # print(f"Adding new node with key {key} and value {value}")
-                if self.get_load_factor / self.capacity > .7:
+                if self.get_load_factor() / self.capacity > .7:
                     self.resize(self.capacity * 2)
                 cur.next = newNode
             else:
@@ -120,7 +120,7 @@ class HashTable:
         if self.hashtable[index] == None:
 
             # print(f"adding new node to blank slot using key {key} and value {value}")
-            if self.get_load_factor / self.capacity > .7:
+            if self.get_load_factor() / self.capacity > .7:
                     self.resize(self.capacity * 2)
             self.hashtable[index] = newNode
         else:
