@@ -108,6 +108,8 @@ class HashTable:
                 cur.value = value #If not empty, search list for matching key
             elif cur.next == None: #if we're at the end of the list, add node and update linked list
                 # print(f"Adding new node with key {key} and value {value}")
+                if self.get_load_factor / self.capacity > .7:
+                    self.resize(self.capacity * 2)
                 cur.next = newNode
             else:
                 searchNodes(cur.next, key, value) #move on 
@@ -116,7 +118,10 @@ class HashTable:
         #If empty slot, add node or update value
         index = self.hash_index(key)
         if self.hashtable[index] == None:
+
             # print(f"adding new node to blank slot using key {key} and value {value}")
+            if self.get_load_factor / self.capacity > .7:
+                    self.resize(self.capacity * 2)
             self.hashtable[index] = newNode
         else:
             searchNodes(self.hashtable[index], key, value)
@@ -204,6 +209,30 @@ class HashTable:
         Implement this.
         """
         # Your code here
+        #save old hashlist 
+        oldArray = self.hashtable
+
+        #create a new array with double the capacity
+        self.capacity = new_capacity
+        self.hashtable = [None] * self.capacity
+
+
+        #populate new array with old hashes
+
+        def rehash_nodes(cur):
+            
+            #rehash node key/value and add to new array
+            self.put(cur.key, cur.value)
+            if cur.next != None:
+                rehash_nodes(cur.next)
+
+            
+        for x in oldArray:
+            if x != None:
+                rehash_nodes(x)
+
+
+        
 
 
 
