@@ -100,20 +100,26 @@ class HashTable:
         # Your code here
         #make node
         newNode = HashTableEntry(key, value)
-        #If empty slot, add node
-        index = self.hash_index(key)
-        if self.hashtable[index] = None:
-            self.hashtable[index] = newNode
 
-        
-        else:
-            cur = self.hashtable[index]
-            if cur.next = None: #if we're at the end of the list, add node and update linked list
+        def searchNodes(cur, key, value):
+            
+            if cur.key == key:
+                # print(f"Editing existing node with key {key} and value {value}")
+                cur.value = value #If not empty, search list for matching key
+            elif cur.next == None: #if we're at the end of the list, add node and update linked list
+                # print(f"Adding new node with key {key} and value {value}")
                 cur.next = newNode
             else:
-                if cur.key = key:
-                    cur.value = value #If not empty, search list for matching key
-        
+                searchNodes(cur.next, key, value) #move on 
+
+
+        #If empty slot, add node or update value
+        index = self.hash_index(key)
+        if self.hashtable[index] == None:
+            # print(f"adding new node to blank slot using key {key} and value {value}")
+            self.hashtable[index] = newNode
+        else:
+            searchNodes(self.hashtable[index], key, value)
             
         
 
@@ -126,7 +132,39 @@ class HashTable:
         Implement this.
         """
         # Your code here
-        self.hashtable[self.hash_index(key)] = None
+
+        def printWarning():
+            print("This is a warning")
+
+        def searchNodes(cur, prev, key):
+            if cur.key == key:
+                deleteNode(cur, prev, key)
+            elif cur.next == None:
+                printWarning()
+            else:
+                searchNodes(cur.next, cur, key)
+
+        def deleteNode(cur, prev, key):
+                #if it's the head, make it the new head
+                if prev == None:
+                    self.hashtable[index] = cur.next
+                #if it's the tail, make the prev the new tail
+                elif cur.next == None:
+                    prev.next = None
+                #otherwise, update the references for prev and next
+                else:
+                    prev.next = cur.next
+        
+
+        #find index
+        index = self.hash_index(key)
+
+        if self.hashtable[index] == None: #if there is no linked list, print warning
+            printWarning()
+        else: #search the list and delete
+            searchNodes(self.hashtable[index], None, key)
+
+        
 
     def get(self, key):
         """
@@ -136,8 +174,26 @@ class HashTable:
 
         Implement this.
         """
+
+        def searchNodes(cur, key):
+            if cur.key == key:
+                print(cur.value)
+                return cur.value
+            elif cur.next == None:
+                return None
+            else:
+                return searchNodes(cur.next, key)
         # Your code here
-        return self.hashtable[self.hash_index(key)]
+        index = self.hash_index(key)
+
+        #if index is none, return None
+        if self.hashtable[index] == None:
+            return None
+        #if linked list, search
+        else:
+            searchNodes(self.hashtable[index], key)
+
+       
 
 
     def resize(self, new_capacity):
