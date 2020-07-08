@@ -46,8 +46,8 @@ class HashTable:
 
         Implement this.
         """
-        # Your code here
-        return len(self.hashtable) - self.hashtable.count(None)
+        # # of items / total # of slots
+        return (len(self.hashtable) - self.hashtable.count(None)) / len(self.hashtable)
 
 
     def fnv1(self, key):
